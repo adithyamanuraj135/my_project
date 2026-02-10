@@ -3,58 +3,100 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Initialize Database
-def init_db():
-    conn = sqlite3.connect("portfolio.db")
-    c = conn.cursor()
+DB_NAME = "portfolio.db"
 
-    c.execute("""
+
+# -------------------- DATABASE CONNECTION --------------------
+def get_db():
+    return sqlite3.connect(DB_NAME)
+
+
+# -------------------- INITIALIZE DATABASE --------------------
+def init_db():
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # Profile Table
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS profile (
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            title TEXT,
-            about TEXT
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            title TEXT NOT NULL,
+            about TEXT NOT NULL
         )
     """)
 
-    # Insert data if table is empty
-    c.execute("SELECT COUNT(*) FROM profile")
-    if c.fetchone()[0] == 0:
-        c.execute("""
+    # Insert Default Data
+    cursor.execute("SELECT COUNT(*) FROM profile")
+
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
             INSERT INTO profile (name, title, about)
             VALUES (?, ?, ?)
         """, (
             "Adithya Manuraj",
             "Web Developer | Python Enthusiast",
-            "I am a passionate web developer with experience in HTML, CSS, and Python."
+            "I am a passionate web developer skilled in Python, HTML, SQL, and backend development."
         ))
 
     conn.commit()
     conn.close()
 
 
-# Run DB setup
+# -------------------- RUN DB SETUP --------------------
 init_db()
 
 
+# -------------------- HOME ROUTE --------------------
 @app.route("/")
 def home():
 
-    conn = sqlite3.connect("portfolio.db")
-    c = conn.cursor()
+    conn = get_db()
+    cursor = conn.cursor()
 
-    c.execute("SELECT name, title, about FROM profile LIMIT 1")
-    data = c.fetchone()
+    cursor.execute("SELECT name, title, about FROM profile LIMIT 1")
+    profile = cursor.fetchone()
 
     conn.close()
 
     return render_template(
         "index.html",
-        name=data[0],
-        title=data[1],
-        about=data[2]
+
+        # Profile
+        name=profile[0],
+        title=profile[1],
+        about=profile[2],
+
+        # Contact
+        phone="999977771",
+        email="adithyamanuraj135@gmail.com",
+
+        # Skills
+        skills=[
+            "C", "C++", "Python", "SQL", "HTML"
+        ],
+
+        # Certifications
+        certificates=[
+            "MongoDB Database Admin Path",
+            "Wadhwani Self Presentation",
+            "Front-End Web Development – Infosys",
+            "UiPath Agentic Automation Training",
+            "Digital Engineering – NASSCOM"
+        ],
+
+        # Education
+        school="Vijaya HSS (2024)",
+        college="Kristu Jayanti University (2028)",
+
+        # Experience
+        experience="Fresher"
     )
 
 
+# -------------------- RUN APP --------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
+
+
+

@@ -2,88 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-        }
+    <title>{{ name }} | Portfolio</title>
 
-        .container {
-            max-width: 600px;
-            background: white;
-            margin: 80px auto;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid #4facfe;
-        }
-
-        h1 { color: #333; }
-        h3 { color: #666; }
-
-        p {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .skills span {
-            background: #4facfe;
-            color: white;
-            padding: 5px 12px;
-            margin: 4px;
-            border-radius: 15px;
-            display: inline-block;
-            font-size: 14px;
-        }
-
-        .footer {
-            font-size: 12px;
-            color: gray;
-            margin-top: 20px;
-        }
-    </style>
-
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<div class="container">
+<!-- ================= HEADER ================= -->
+<header>
 
-    <!-- Profile Image -->
-    <img src="{{ url_for('static', filename='image1.jpeg') }}">
+    <img src="{{ url_for('static', filename='image1.jpeg') }}"
+         alt="Adithya Photo"
+         class="profile-pic">
 
-    <!-- Name -->
     <h1>{{ name }}</h1>
-
-    <!-- Title -->
     <h3>{{ title }}</h3>
 
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+<main>
+
     <!-- About -->
-    <p>{{ about }}</p>
+    <section>
+        <h2>About Me</h2>
+        <p>{{ about }}</p>
+    </section>
+
 
     <!-- Skills -->
-    <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>Python</span>
-        <span>Flask</span>
-        <span>SQLite</span>
-    </div>
+    <section>
+        <h2>Skills</h2>
 
-    <div class="footer">
-        © 2026 Adithya Manuraj
-    </div>
+        <ul class="skills-list">
+            {% for skill in skills %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
-</div>
+
+    <!-- Certifications -->
+    <section>
+        <h2>Certifications</h2>
+
+        <ul>
+            {% for cert in certificates %}
+            <li>{{ cert }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+
+    <!-- Education -->
+    <section>
+        <h2>Education</h2>
+
+        <p><strong>School:</strong> {{ school }}</p>
+        <p><strong>College:</strong> {{ college }}</p>
+    </section>
+
+
+    <!-- Experience -->
+    <section>
+        <h2>Experience</h2>
+
+        <p>{{ experience }}</p>
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contact</h2>
+
+        <p>📞 
+            <a href="tel:{{ phone }}">{{ phone }}</a>
+        </p>
+
+        <p>📧 
+            <a href="mailto:{{ email }}">{{ email }}</a>
+        </p>
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p>© 2026 | {{ name }} | All Rights Reserved</p>
+</footer>
+
 
 </body>
 </html>
