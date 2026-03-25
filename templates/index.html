@@ -49,15 +49,43 @@
 
 
     <!-- Certifications -->
-    <section>
-        <h2>Certifications</h2>
+<section>
 
-        <ul>
-            {% for cert in certificates %}
-            <li>{{ cert }}</li>
-            {% endfor %}
-        </ul>
-    </section>
+    <h2>Certificates</h2>
+
+<ul>
+  <li>
+    <a href="https://drive.google.com/file/d/1JjlWrd5rA2bx_NpELNMq4li8AF1YNOip/view?usp=drivesdk" target="_blank">
+      MongoDB Database Admin Path
+    </a>
+  </li>
+
+  <li>
+    <a href="https://drive.google.com/file/d/1RW6a81x5E7CNSazZESFJNQ3KMm93Ogk2/view?usp=drivesdk" target="_blank">
+      Wadhwani Self Presentation
+    </a>
+  </li>
+
+  <li>
+    <a href="https://drive.google.com/file/d/1DLSlfD31T8zw_6bVJz49MZCWjT-eeYS2/view?usp=drivesdk" target="_blank">
+      Front-End Web Development – Infosys
+    </a>
+  </li>
+
+  <li>
+    <a href="https://drive.google.com/file/d/1wv22dvtmpHRXWjO3MFQR4AG-oqpoiHSf/view?usp=drivesdk" target="_blank">
+      UiPath Agentic Automation Training
+    </a>
+  </li>
+
+  <li>
+    <a href="https://drive.google.com/file/d/16k7s6ogYozYrr3V24x8LjlnR4OoVxp9g/view?usp=drivesdk" target="_blank">
+      Digital Engineering – NASSCOM
+    </a>
+  </li>
+</ul>
+</section>
+
 
 
     <!-- Education -->
@@ -89,6 +117,24 @@
             <a href="mailto:{{ email }}">{{ email }}</a>
         </p>
     </section>
+    <h2>Contact Me</h2>
+
+<div style="width:400px; padding:20px; border:1px solid #ccc; border-radius:10px;">
+    <form method="POST" action="/enquiry">
+        
+        <label>Your Name</label><br>
+        <input type="text" name="name" required style="width:100%; padding:8px;"><br><br>
+
+        <label>Your Email</label><br>
+        <input type="email" name="email" required style="width:100%; padding:8px;"><br><br>
+
+        <label>Your Message</label><br>
+        <textarea name="message" rows="5" required style="width:100%; padding:8px;"></textarea><br><br>
+
+        <button type="submit" style="padding:10px 15px;">Send Message</button>
+
+    </form>
+</div>
 
 </main>
 
