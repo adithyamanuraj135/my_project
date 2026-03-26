@@ -139,3 +139,9 @@ footer {
     background: white;
 }
 
+button {
+
+    border-radius:10px;
+    color: #ccc;
+    background-color: #fff;
+}
